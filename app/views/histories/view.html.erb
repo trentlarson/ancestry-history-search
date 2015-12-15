@@ -1,0 +1,95 @@
+<html>
+
+<head>
+  <link href="/stylesheets/default.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+
+<form name="diigoWordSearchForm" method="get" action="http://groups.diigo.com/search">
+  <input type="hidden" name="group_name" value="tolman-family" />
+  <input type="hidden" name="what" value="<%= @diigoIds %>" /><!-- this may change -->
+  <input type="hidden" name="ids" value="<%= @diigoIds %>" /><!-- just in case the 'what' changes -->
+</form>
+
+<div id="wrapper">
+
+  <div id="header">
+    <h1>Your Ancestors' Stories</h1>
+  </div>
+
+  <div id="content">
+
+Search below and find yourself or your close ancestors, such as your
+grandparents.  As you do, the system will look through their ancestors
+all the way back through our records and find any histories that we
+have for any of them.  Most of our histories are from the <a
+href="http://thomas.tolmanfamily.org">Thomas Tolman Family
+Organization</a> collection; however, we do add others to our
+database, so feel free to <a
+href="mailto:thomas.tolmanfamily.org@gmail.com">contact us</a>
+to add more information.  We'd love to have your help.  Enjoy!
+
+<hr>
+
+<p>
+<center>
+<% if @diigoIds != nil %>
+  <a href="http://groups.diigo.com/group/tolman-family/content/tag/<%= @diigoIds %>?dm=simple">See all my ancestors' histories!</a>
+  <br/>
+<!--
+  ... or enter some words (like "kindness"): <form name="searchWordsForm"><input type="text" name="searchWords" /></form> 
+  ... and <a href="javascript: document.diigoWordSearchForm.what.value='(' + document.diigoWordSearchForm.ids.value + ' AND (' + document.searchWordsForm.searchWords.value + '))'; document.diigoWordSearchForm.submit();">search for them in those histories!</a>
+  <br/><br/>
+-->
+  (If you go there but don't see any histories, click <a href='?removeAll=y'>here</a> to remove all the people, then search and add them again.)
+
+<% else %>
+
+  <% if !@foundAncestors.empty? then %>
+    <b>Unfortunately, we do not have any histories for any ancestors of the people below.  Please <a href="mailto:thomas.tolmanfamily.org@gmail.com">contact us</a> with more histories to add to our collection.</b>
+  <% end %>
+
+<% end %>
+</center>
+</p>
+
+
+<p>
+<%= @historiesLineages %>
+</p>
+
+<p>
+<% if !@foundAncestors.empty? then %>
+Here are the closest ancestors you selected.  (Click <a href="?removeAll=y">here</a> to forget these and start over.)
+<%= @foundAncestorsOutput %>
+<% end %>
+</p>
+
+<p>
+<form action="view" method="post">
+  <%= token_tag %><%# Keeps away the InvalidAuthenticityToken error %>
+  Enter a portion of your name or an ancestor's name: <input type="text" name="search"/>
+  <input type="submit" value="Search"/>
+</form>
+
+<p>
+<% if !params["search"].nil? %>
+Matches:
+<%= @searchOutput %>
+<% end %>
+</p>
+
+  </div><!-- end content -->
+
+  <!-- Please do not remove the "Design by" information. -->
+  <div id="footer">
+    <p>Style design by <a title="India News" href="http://www.sumanasa.com/">Sumanasa.com</a>; see <a href="/stylesheets/default.css">stylesheet</a> for details.</p>
+
+  </div><!-- end footer -->
+
+
+</div><!-- end wrapper -->
+</body>
+</html>
