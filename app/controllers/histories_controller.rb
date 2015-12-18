@@ -182,7 +182,7 @@ class HistoriesController < ApplicationController
     # Now list any search results.
     searchResults = []
     if !params["search"].nil?
-      searchResults = Individual.find(:all, :conditions => ["full_name LIKE '%%#{params["search"]}%%'"], :order => "full_name")
+      searchResults = Individual.where("full_name LIKE ?", "%"+params["search"]+"%").all
     end
 
     if searchResults.length == 0

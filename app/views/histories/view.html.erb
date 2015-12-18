@@ -68,7 +68,7 @@ Here are the closest ancestors you selected.  (Click <a href="?removeAll=y">here
 </p>
 
 <p>
-<form action="view" method="post">
+<form action="view" method="get">
   <%= token_tag %><%# Keeps away the InvalidAuthenticityToken error %>
   Enter a portion of your name or an ancestor's name: <input type="text" name="search"/>
   <input type="submit" value="Search"/>
