@@ -1,5 +1,11 @@
 # ancestry-history-search
 
+This app takes a DB full of names & mother/father relationships, lets a user search for people in that DB and mark which ones are their ancestors, then lets the user search for keywords inside history files containing any of their ancestors (from the marked ones on back).
+
+... or, it should, but it's been crippled by updates to hosting providers and deprecation of services.
+
+### Installation
+
 On my current plaform this just gives an error 500 with no output in
 any logs, no matter how I tweak my configs.  If I can use 2011
 versions of Ruby and Rails then I'd go for this option; all the file
